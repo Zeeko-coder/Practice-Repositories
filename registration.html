@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Registration Form</title>
 
     <style>
@@ -22,63 +23,79 @@
             padding: 20px;
         }
 
-        .register-container {
+        .container {
             width: 420px;
             background: white;
-            padding: 35px;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .register-container h1 {
+        h1 {
             text-align: center;
             margin-bottom: 8px;
-            color: #222;
         }
 
-        .register-container p {
+        .subtitle {
             text-align: center;
             color: #777;
             margin-bottom: 25px;
         }
 
         .input-group {
-            margin-bottom: 16px;
+            margin-bottom: 15px;
         }
 
-        .input-group label {
+        label {
             display: block;
-            margin-bottom: 7px;
-            color: #333;
+            margin-bottom: 6px;
             font-weight: bold;
         }
 
-        .input-group input,
-        .input-group select {
+        input,
+        select {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             border: 1px solid #ccc;
             border-radius: 6px;
-            outline: none;
             font-size: 15px;
         }
 
-        .input-group input:focus,
-        .input-group select:focus {
+        input:focus,
+        select:focus {
+            outline: none;
             border-color: #007bff;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 70px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: #007bff;
+            cursor: pointer;
         }
 
         .terms {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 8px;
-            margin-bottom: 20px;
+            margin: 18px 0;
             font-size: 14px;
-            color: #555;
         }
 
         .terms input {
-            margin-top: 3px;
+            width: auto;
         }
 
         .terms a {
@@ -105,7 +122,6 @@
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
-            color: #555;
         }
 
         .login-link a {
@@ -113,106 +129,261 @@
             text-decoration: none;
             font-weight: bold;
         }
+
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="register-container">
+    <div class="container">
 
         <h1>Create Account</h1>
-        <p>Fill in the information below to register</p>
 
-        <form>
+        <p class="subtitle">
+            Register your account below
+        </p>
 
+        <form id="registrationForm">
+
+            <!-- Full Name -->
             <div class="input-group">
                 <label for="fullname">Full Name</label>
+
                 <input
                     type="text"
                     id="fullname"
-                    name="fullname"
                     placeholder="Enter your full name"
                     required
                 >
             </div>
 
+            <!-- Username -->
             <div class="input-group">
                 <label for="username">Username</label>
+
                 <input
                     type="text"
                     id="username"
-                    name="username"
-                    placeholder="Choose a username"
+                    placeholder="Enter your username"
                     required
                 >
             </div>
 
+            <!-- Email -->
             <div class="input-group">
-                <label for="email">Email</label>
+                <label for="email">Email Address</label>
+
                 <input
                     type="email"
                     id="email"
-                    name="email"
                     placeholder="Enter your email"
                     required
                 >
             </div>
 
+            <!-- Course -->
             <div class="input-group">
                 <label for="course">Course</label>
 
-                <select id="course" name="course" required>
+                <select id="course" required>
                     <option value="">Select your course</option>
-                    <option value="BSIT">BS Information Technology</option>
-                    <option value="BSCS">BS Computer Science</option>
-                    <option value="BSIS">BS Information Systems</option>
-                    <option value="BSE">Bachelor of Secondary Education</option>
+                    <option value="BSIT">
+                        BS Information Technology
+                    </option>
+
+                    <option value="BSCS">
+                        BS Computer Science
+                    </option>
+
+                    <option value="BSIS">
+                        BS Information Systems
+                    </option>
+
+                    <option value="BSE">
+                        Bachelor of Secondary Education
+                    </option>
                 </select>
             </div>
 
+            <!-- Password -->
             <div class="input-group">
+
                 <label for="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Create a password"
-                    required
-                >
+
+                <div class="password-container">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('password', this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
             </div>
 
+            <!-- Confirm Password -->
             <div class="input-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input
-                    type="password"
-                    id="confirm-password"
-                    name="confirm-password"
-                    placeholder="Confirm your password"
-                    required
-                >
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <div class="password-container">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('confirmPassword', this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
             </div>
 
+            <!-- Terms -->
             <div class="terms">
-                <input type="checkbox" id="terms" required>
+
+                <input
+                    type="checkbox"
+                    id="terms"
+                    required
+                >
 
                 <label for="terms">
                     I agree to the
                     <a href="#">Terms and Conditions</a>
                 </label>
+
             </div>
 
-            <button type="submit" class="register-btn">
+            <!-- Submit -->
+            <button
+                type="submit"
+                class="register-btn"
+            >
                 Create Account
             </button>
 
+            <p
+                id="message"
+                class="message"
+            ></p>
+
         </form>
 
+        <!-- Login -->
         <div class="login-link">
+
             Already have an account?
-            <a href="login.html">Login</a>
+
+            <a href="login.html">
+                Login
+            </a>
+
         </div>
 
     </div>
+
+
+    <script>
+
+        // Show / Hide Password
+        function togglePassword(inputId, button) {
+
+            const input = document.getElementById(inputId);
+
+            if (input.type === "password") {
+
+                input.type = "text";
+                button.textContent = "Hide";
+
+            } else {
+
+                input.type = "password";
+                button.textContent = "Show";
+
+            }
+        }
+
+
+        // Registration Validation
+        document
+            .getElementById("registrationForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword").value;
+
+                const message =
+                    document.getElementById("message");
+
+
+                // Check password
+                if (password !== confirmPassword) {
+
+                    message.textContent =
+                        "Passwords do not match.";
+
+                    message.style.color = "red";
+
+                    return;
+                }
+
+
+                // Check password length
+                if (password.length < 6) {
+
+                    message.textContent =
+                        "Password must be at least 6 characters.";
+
+                    message.style.color = "red";
+
+                    return;
+                }
+
+
+                // Successful registration
+                message.textContent =
+                    "Registration successful!";
+
+                message.style.color = "green";
+
+
+                // Clear form
+                this.reset();
+
+            });
+
+    </script>
 
 </body>
 </html>
